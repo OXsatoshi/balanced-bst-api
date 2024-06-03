@@ -53,11 +53,47 @@ export class Tree {
       temp.left.setData(value);
     }
   }
-  deleteItem(value) {
-    let temp = this.root;
-    while (value !== temp.data) {
-      if (value > temp.data) temp = temp.right;
-      else if (value < temp.data) temp = temp.left;
+  deleteItem(value, node) {
+    if (node.data === value) {
+      if (this.isALeaf(node)) return null;
+      if (this.hasOneChild(node)) return node.left || node.right;
+      else {
+        let n = this.min(node.right);
+        console.log(n);
+        node.data = n;
+        node.right = this.deleteItem(n, node.right);
+        return node;
+      }
+    } else {
+      if (value > node.data && node.right) {
+        node.right = this.deleteItem(value, node.right);
+        return node;
+      } else if (value < node.data && node.left) {
+        node.left = this.deleteItem(value, node.left);
+        return node;
+      }
+    }
+  }
+  isALeaf(node) {
+    return node.left === null && node.right === null;
+  }
+  min(node) {
+    if (node.left === null) return node.data;
+    else {
+      return this.min(node.left);
+    }
+  }
+  hasOneChild(node) {
+    return (
+      !(node.left !== null && node.right !== null) &&
+      (node.left !== null || node.right !== null)
+    );
+  }
+  find(value, node) {
+    if (node.data === value) return node;
+    else {
+      if (value > node.value) find(value, node.right);
+      else this.find(value, node.left);
     }
   }
 }
