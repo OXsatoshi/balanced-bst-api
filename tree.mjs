@@ -90,10 +90,36 @@ export class Tree {
     );
   }
   find(value, node) {
-    if (node.data === value) return node;
-    else {
-      if (value > node.value) find(value, node.right);
-      else this.find(value, node.left);
+    if (node === null) {
+      console.log(value + "nexist pas");
+      return;
+    } else if (node.data === value) return node;
+    if (value > node.data) return this.find(value, node.right);
+    else return this.find(value, node.left);
+  }
+  breadthFirst(func) {
+    const queue = [];
+    queue.push(this.root);
+    while (queue.length !== 0) {
+      let node = queue.shift();
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+      func(node);
     }
+  }
+  recBreadthFirs(func, queue) {
+    if (queue.length === 0) return;
+    else {
+      let node = queue.shift();
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+      func(node);
+      this.recBreadthFirs(func, queue);
+    }
+  }
+  recuresionBreadthFirt(func) {
+    let queue = [];
+    queue.push(this.root);
+    this.recBreadthFirs(func, queue);
   }
 }
