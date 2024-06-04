@@ -163,4 +163,18 @@ export class Tree {
     if (root.data > node.data) return 1 + this.depth(root.left, node);
     if (root.data < node.data) return 1 + this.depth(root.right, node);
   }
+  isBalanced(root) {
+    if (root === null) {
+      return true;
+    } else {
+      let leftSideNumber = this.height(root.left);
+      let rightSideNumber = this.height(root.right);
+      console.log(leftSideNumber - rightSideNumber);
+      return (
+        Math.abs(leftSideNumber - rightSideNumber) <= 1 &&
+        this.isBalanced(root.left) &&
+        this.isBalanced(root.right)
+      );
+    }
+  }
 }
