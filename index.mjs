@@ -10,4 +10,4 @@ tree.insert(5);
 //tree.deleteItem(4, tree.root);
 //console.log(tree.getRoot());
 tree.prettyPrint(tree.getRoot());
-tree.recuresionBreadthFirt((e) => console.log(e.data));
+console.log(tree.depth(tree.root, tree.root.left.right));

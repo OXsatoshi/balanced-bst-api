@@ -122,4 +122,45 @@ export class Tree {
     queue.push(this.root);
     this.recBreadthFirs(func, queue);
   }
+  inorder(func, node) {
+    if (node === null) {
+      return;
+    } else {
+      this.inorder(func, node.left);
+      func(node);
+      this.inorder(func, node.right);
+    }
+  }
+  postorder(func, node) {
+    if (node === null) {
+      return;
+    } else {
+      this.postorder(func, node.left);
+
+      this.postorder(func, node.right);
+      func(node);
+    }
+  }
+  preorder(func, node) {
+    if (node === null) {
+      return;
+    } else {
+      func(node);
+      this.preorder(func, node.left);
+      this.preorder(func, node.right);
+    }
+  }
+  height(node) {
+    if (node === null || this.isALeaf(node)) return 0;
+
+    return 1 + this.max(this.height(node.right), this.height(node.left));
+  }
+  max(a, b) {
+    return a > b ? a : b;
+  }
+  depth(root, node) {
+    if (root === node) return 0;
+    if (root.data > node.data) return 1 + this.depth(root.left, node);
+    if (root.data < node.data) return 1 + this.depth(root.right, node);
+  }
 }
