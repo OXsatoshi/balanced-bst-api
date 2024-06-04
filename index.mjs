@@ -12,3 +12,4 @@ tree.deleteItem(3, tree.root);
 tree.prettyPrint(tree.getRoot());
 //console.log(tree.depth(tree.root, tree.root.left.right));
 console.log(tree.isBalanced(tree.root));
+console.log(tree.Balence(tree.root));

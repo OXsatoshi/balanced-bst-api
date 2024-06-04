@@ -177,4 +177,11 @@ export class Tree {
       );
     }
   }
+  Balence(root) {
+    let arr = this.inorder((e) => {
+      arr.push(e.data);
+      return arr;
+    }, root);
+    return arr;
+  }
 }
